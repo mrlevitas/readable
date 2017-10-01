@@ -3,9 +3,6 @@ import * as API from '../utils/api'
 export const GET_POSTS_REQUEST = "GET_POSTS_REQUEST";
 export const GET_POSTS_REQUEST_SUCCESS = "GET_POSTS_REQUEST_SUCCESS";
 export const GET_POSTS_REQUEST_FAILURE = "GET_POSTS_REQUEST_FAILURE";
-// export const ADD_POST = 'ADD_POST'
-
-// export const REMOVE_FROM_CALENDAR = 'REMOVE_FROM_CALENDAR'
 
 // export function addPost({ title, body, author, category }) {
 //   return {
@@ -42,7 +39,7 @@ let getPosts = () => dispatch => {
   API.fetchPosts()
   .then((response) => dispatch(getPostsRequestSuccess(response)))
   .catch(() => dispatch(getPostsRequestFailure()))
-  .catch((error) => console.log(error))
+  // .catch((error) => console.log(error))
 };
 
 export { getPosts };
