@@ -1,62 +1,27 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { getPosts } from '../actions/posts'
-import PostList from './PostList'
+import { Link, Route, Switch, Redirect} from 'react-router-dom'
+import PostsIndex from '../containers/PostsIndex'
+import PostShow from '../containers/PostShow'
+import { withRouter } from 'react-router-dom'
 
 class App extends Component {
   constructor(props) {
     super(props);
-    // this.handleSubmit = this.handleSubmit.bind(this)
-  }
-
-  state = {
-    posts: [],
-  }
-
-  componentDidMount() {
-    this.props.getPosts();
   }
 
   render() {
-    const { posts, getPosts } = this.props
-
     return (
       <div>
-        <div>
-          {posts !== null && (
-                    <PostList
-                      posts={posts}
-                    />)}
-        </div>
-        <input
-          type='text'
-          ref={(input) => this.input = input}
-          placeholder="Post here"
-        />
-        <button onClick={(post) => {
-                                getPosts({ title: post, body:"post body", author: "bob", category: "react" })
-                              }} >
-        Submit</button>
+        <Link to="/posts">Home</Link>{' '}
+        <Switch>
+          <Route exact path='/posts' component={PostsIndex}/>
+          <Route path="/posts/:id" component={PostShow}/>
+        <Redirect from="/" to="/posts" />
+        </Switch>
       </div>
     )
   }
 }
 
-function mapStateToProps (state) {
-  return {
-    posts: state.post.retrievedPosts
-  }
-}
-
-
-function mapDispatchToProps (dispatch) {
-  return {
-    getPosts: () => dispatch(getPosts()),
-    // createPost: (data) => dispatch(addPost(data))
-  }
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App)
+export default withRouter(connect()(App))

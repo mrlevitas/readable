@@ -6,7 +6,7 @@ import {
   GET_POSTS_REQUEST,
   GET_POSTS_REQUEST_SUCCESS,
   GET_POSTS_REQUEST_FAILURE
-} from '../actions/posts';
+} from '../actions/postsIndex';
 
 const initialPostState = {
   retrievedPosts: []
@@ -27,10 +27,6 @@ function post (state = initialPostState, action) {
     case GET_POSTS_REQUEST_FAILURE:
       return Object.assign({}, state, {
       });
-    // case ADD_POST :
-    //   return {
-    //     ...state,
-    //   }
     // case REMOVE_FROM_CALENDAR :
     //   return {
     //     ...state,

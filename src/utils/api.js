@@ -1,13 +1,24 @@
-const url = `http://localhost:3001/posts`;
-const headers = {
+const postsUrl = `http://localhost:3001/posts`;
+const postsHeaders = {
   Accept: 'application/json',
   Authorization: 'mrlevitas',
 }
 
 export const fetchPosts = () =>
-  fetch(url, {headers : headers})
+  fetch(postsUrl, {headers : postsHeaders})
     .then((response) => response.json())
 
+
+const commentsHeaders = {
+  Authorization: 'mrlevitas',
+  'Content-Type': 'multipart/form-data'
+}
+
+export const fetchComments = (postId) =>
+  fetch(`http://localhost:3001/posts/${postId}/comments`, {
+    headers: commentsHeaders
+  })
+    .then((response) => response.json())
 // export const get = (bookId) =>
 //   fetch(`${api}/books/${bookId}`, { headers })
 //     .then(res => res.json())
