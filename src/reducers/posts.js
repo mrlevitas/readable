@@ -5,11 +5,28 @@
 import {
   GET_POSTS_REQUEST,
   GET_POSTS_REQUEST_SUCCESS,
-  GET_POSTS_REQUEST_FAILURE
+  GET_POSTS_REQUEST_FAILURE,
+  GET_POST_COMMENT_COUNT_REQUEST,
+  GET_POST_COMMENT_COUNT_REQUEST_SUCCESS,
+  GET_POST_COMMENT_COUNT_REQUEST_FAILURE
 } from '../actions/postsIndex';
 
 const initialPostState = {
   retrievedPosts: []
+}
+
+let updateCommentCount = (array, id, count) => {
+  let newArray = array.slice();
+  let position = array.findIndex((element) => {
+    return element.id === id;
+  })
+  let newElement = Object.assign({}, array[position], {
+    commentCount: count
+  })
+
+  newArray.splice(position,1,newElement)
+
+  return newArray
 }
 
 function post (state = initialPostState, action) {
@@ -27,14 +44,18 @@ function post (state = initialPostState, action) {
     case GET_POSTS_REQUEST_FAILURE:
       return Object.assign({}, state, {
       });
-    // case REMOVE_FROM_CALENDAR :
-    //   return {
-    //     ...state,
-    //     [day]: {
-    //       ...state[day],
-    //       [meal]: null,
-    //     }
-    //   }
+    case GET_POST_COMMENT_COUNT_REQUEST:
+      return Object.assign({}, state, {
+
+      });
+    case GET_POST_COMMENT_COUNT_REQUEST_SUCCESS:
+      let countUpdatedPosts = updateCommentCount(state.retrievedPosts, action.postId, action.count)
+      return Object.assign({}, state, {
+          retrievedPosts: countUpdatedPosts
+      });
+    case GET_POST_COMMENT_COUNT_REQUEST_FAILURE:
+      return Object.assign({}, state, {
+      });
     default :
       return state
   }

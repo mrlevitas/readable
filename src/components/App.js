@@ -5,15 +5,11 @@ import PostsIndex from '../containers/PostsIndex'
 import PostShow from '../containers/PostShow'
 import { withRouter } from 'react-router-dom'
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-  }
+const App = ({ params }) => {
 
-  render() {
     return (
       <div>
-        <Link to="/posts">Home</Link>{' '}
+        <Link to="/posts">Home</Link>
         <Switch>
           <Route exact path='/posts' component={PostsIndex}/>
           <Route path="/posts/:id" component={PostShow}/>
@@ -21,7 +17,7 @@ class App extends Component {
         </Switch>
       </div>
     )
-  }
+
 }
 
 export default withRouter(connect()(App))
