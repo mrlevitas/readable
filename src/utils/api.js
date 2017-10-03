@@ -4,6 +4,11 @@ const postsHeaders = {
   Authorization: 'mrlevitas',
 }
 
+const voteHeaders = {
+  Authorization: 'mrlevitas',
+  'Content-Type': 'application/json'
+}
+
 export const fetchPosts = () =>
   fetch(postsUrl, {headers : postsHeaders})
     .then((response) => response.json())
@@ -19,6 +24,16 @@ export const fetchComments = (postId) =>
     headers: commentsHeaders
   })
     .then((response) => response.json())
+
+export const pushPostVote = (postId, vote) =>
+  fetch(`http://localhost:3001/posts/${postId}`, {
+     headers: voteHeaders,
+     method: "POST",
+     body: JSON.stringify({option: vote})
+   })
+   .then((response) => response.json())
+   .then((response) => console.log(response))
+
 // export const get = (bookId) =>
 //   fetch(`${api}/books/${bookId}`, { headers })
 //     .then(res => res.json())
