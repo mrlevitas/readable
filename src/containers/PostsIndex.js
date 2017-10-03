@@ -1,5 +1,5 @@
-import React              from 'react';
-import { connect }        from 'react-redux';
+import React from 'react';
+import { connect } from 'react-redux';
 
 import { getPosts } from '../actions/postsIndex'
 
@@ -14,7 +14,7 @@ class PostsIndex extends React.Component {
 
 
   componentDidMount() {
-    this.props.getPosts();
+    this.props.getPosts()
   }
 
   // handleSubmit(newPost){
@@ -40,7 +40,6 @@ function mapStateToProps (state) {
 function mapDispatchToProps (dispatch) {
   return {
     getPosts: () => dispatch(getPosts()),
-    // createPost: (data) => dispatch(addPost(data))
   }
 }
 

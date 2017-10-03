@@ -2,6 +2,7 @@ import React from 'react';
 import { connect }        from 'react-redux';
 import { getComments } from '../actions/getComments';
 import Post from '../components/Post'
+import Comment from '../components/Comment'
 
 class PostShow extends React.Component {
   constructor(props) {
@@ -18,7 +19,13 @@ class PostShow extends React.Component {
       <div>
 
         <Post data={this.props.currentPost} />
-
+        <ul className='comment-list'>
+          {this.props.comments.map((item) => (
+            <li key={item.id}>
+              <Comment data={item}/>
+            </li>
+          ))}
+        </ul>
       </div>
     )
   }
@@ -27,7 +34,7 @@ class PostShow extends React.Component {
 function mapStateToProps (state) {
   return {
     currentPost: state.currentPost.data,
-    comments: state.comments
+    comments: state.comment.comments
   }
 }
 

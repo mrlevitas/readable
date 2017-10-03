@@ -15,7 +15,7 @@ class PostList extends React.Component {
         {this.props.posts.map((item) => (
           <li key={item.id}>
             <Post key={item.id} data={item} />
-            <Link to={`/posts/${item.id}`} onClick={() => this.props.getPost(item) }>View Comments</Link>
+            <Link to={`/posts/${item.id}`} onClick={() => this.props.getPost(item) }>View <strong>{item.commentCount}</strong> Comments</Link>
           </li>
         ))}
       </ul>
