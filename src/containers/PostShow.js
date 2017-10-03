@@ -11,14 +11,15 @@ class PostShow extends React.Component {
   }
 
   componentDidMount(){
-    this.props.getComments(this.props.currentPost);
+    this.props.getComments(this.props.currentPostId);
   }
 
   render(){
+    let post = this.props.postArray.find((post) => post.id === this.props.currentPostId)
+
     return(
       <div>
-
-        <Post data={this.props.currentPost} />
+        <Post data={post} />
         <ul className='comment-list'>
           {this.props.comments.map((item) => (
             <li key={item.id}>
@@ -31,9 +32,10 @@ class PostShow extends React.Component {
   }
 }
 
-function mapStateToProps (state) {
+function mapStateToProps (state, ownProps) {
   return {
-    currentPost: state.currentPost.data,
+    postArray: state.post.retrievedPosts,
+    currentPostId: state.currentPost.currentPostId,
     comments: state.comment.comments
   }
 }

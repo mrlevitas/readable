@@ -1,15 +1,15 @@
 import { push } from 'react-router-redux'
 export const SET_POST = "SET_POST";
 
-let setPost = (post) => {
+let setPost = (postId) => {
   return {
     type: SET_POST,
-    currentPost: post
+    currentPostId: postId
   }
 }
 
-let getPost = (post) => dispatch => {
-  dispatch(setPost(post))
+let getPost = (postId) => dispatch => {
+  dispatch(setPost(postId))
   // dispatch(push(`/posts/${post.id}`))
 };
 

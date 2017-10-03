@@ -3,14 +3,14 @@ import {
 } from '../actions/getPost';
 
 let initialState = {
-  data: null
+  currentPostId: ""
 }
 
 const currentPost = (state = initialState, action) => {
   switch(action.type) {
     case SET_POST:
       return Object.assign({}, state, {
-        data: action.currentPost
+        currentPostId: action.currentPostId
       });
     default:
       return state;
