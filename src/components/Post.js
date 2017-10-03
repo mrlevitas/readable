@@ -1,5 +1,5 @@
 import React from 'react';
-import VoteButton from './VoteButton'
+import PostVoteButton from './PostVoteButton'
 
 const Post = props => {
 
@@ -8,8 +8,8 @@ const Post = props => {
       <h3>{props.data.title}</h3>
       <div>{props.data.body}</div>
       <div><strong>Votes: {props.data.voteScore}</strong></div>
-      <VoteButton postId={props.data.id} arrow="up"/>
-      <VoteButton postId={props.data.id} arrow="down"/>
+      <PostVoteButton postId={props.data.id} arrow="up"/>
+      <PostVoteButton postId={props.data.id} arrow="down"/>
     </div>
   )
 }

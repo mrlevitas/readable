@@ -27,12 +27,20 @@ export const fetchComments = (postId) =>
 
 export const pushPostVote = (postId, vote) =>
   fetch(`http://localhost:3001/posts/${postId}`, {
-     headers: voteHeaders,
-     method: "POST",
-     body: JSON.stringify({option: vote})
-   })
-   .then((response) => response.json())
-   .then((response) => console.log(response))
+    headers: voteHeaders,
+    method: "POST",
+    body: JSON.stringify({option: vote})
+  })
+  .then((response) => response.json())
+
+export const pushCommentVote = (commentId, vote) =>
+  fetch(`http://localhost:3001/comments/${commentId}`, {
+    headers: voteHeaders,
+    method: "POST",
+    body: JSON.stringify({option: vote})
+  })
+    .then((response) => response.json())
+    .then((response) => console.log(response))
 
 // export const get = (bookId) =>
 //   fetch(`${api}/books/${bookId}`, { headers })

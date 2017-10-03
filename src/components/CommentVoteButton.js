@@ -1,16 +1,16 @@
 import React          from 'react';
 // import { Button }     from 'react-bootstrap';
 import { connect }    from 'react-redux';
-import { adjustPostVote } from '../actions/votePost';
+import { adjustCommentVote } from '../actions/voteComment';
 
-class VoteButton extends React.Component {
+class CommentVoteButton extends React.Component {
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this)
   }
 
   handleClick(){
-    this.props.adjustPostVote(this.props.postId, this.props.arrow)
+    this.props.adjustCommentVote(this.props.commentId, this.props.arrow)
   }
 
   render(){
@@ -29,8 +29,8 @@ let mapStateToProps = () => {
 
 let mapDispatchToProps = dispatch => {
   return {
-    adjustPostVote: (postId, arrow) => dispatch(adjustPostVote(postId, arrow))
+    adjustCommentVote: (commentId, arrow) => dispatch(adjustCommentVote(commentId, arrow))
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(VoteButton);
+export default connect(mapStateToProps, mapDispatchToProps)(CommentVoteButton);
