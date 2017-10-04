@@ -1,9 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-
 import { getPosts } from '../actions/postsIndex'
-
 import PostList from '../components/PostList'
+import sortBy from 'lodash/sortBy';
 // import PostForm          from '../components/PostForm';
 
 class PostsIndex extends React.Component {
@@ -25,7 +24,7 @@ class PostsIndex extends React.Component {
   render(){
     return (
       <div>
-        <PostList posts={this.props.posts} />
+        <PostList posts={sortBy(this.props.posts, 'voteScore').reverse()} />
       </div>
     )
   }
