@@ -8,6 +8,14 @@ li{
   list-style-type: none;
 }
 
+ul.subheader {
+  font-size: 30px;
+  font-weight: 300;
+  text-align: left;
+  list-style: none;
+  padding: 4px 0 4px 15px;
+  min-width: 800px;
+}
 
 button.up {
   background-color: green;
@@ -36,9 +44,19 @@ button.down {
   margin: 10px 0;
 }
 
-.subheader {
-  font-size: 30px;
-  font-weight: 300;
+.subheader li {
+  display: inline;
+  margin-top: 1px;
+  line-height: 15px;
+  margin: 0 10px 10px;
+}
+
+.selected {
+  line-height: 15px;
+  color: 'green';
+  font-weight: bold;
+  border-bottom-left-radius: 1em;
+  border-bottom-right-radius: 1em;
 }
 
 .icon-btn {
