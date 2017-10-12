@@ -1,3 +1,5 @@
+import uniqueid from 'lodash/uniqueId'
+
 const postsUrl = `http://localhost:3001/posts`;
 const postsHeaders = {
   Accept: 'application/json',
@@ -40,8 +42,19 @@ export const pushCommentVote = (commentId, vote) =>
     body: JSON.stringify({option: vote})
   })
     .then((response) => response.json())
-    .then((response) => console.log(response))
 
+export const pushPost = (newPost) =>
+  fetch(`http://localhost:3001/posts`, {
+    headers: voteHeaders,
+    method: "POST",
+    body: JSON.stringify({ id: uniqueid(),
+                          timestamp: Date.now(),
+                          title: newPost.title,
+                          body: newPost.body,
+                          author: newPost.author,
+                          category: newPost.category})
+  })
+    .then((response) => response.json())
 // export const get = (bookId) =>
 //   fetch(`${api}/books/${bookId}`, { headers })
 //     .then(res => res.json())

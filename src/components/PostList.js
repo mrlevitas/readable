@@ -51,7 +51,7 @@ class PostList extends React.Component {
         <ul className='post-list'>
           {this.state.orderedPosts.map((item) => (
             <li key={item.id}>
-              <Post key={item.id} data={item} />
+              <Post data={item} />
               <Link to={`/posts/${item.id}`} onClick={() => this.props.getPost(item.id) }>View <strong>{item.commentCount}</strong> Comments</Link>
             </li>
           ))}

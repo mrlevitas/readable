@@ -16,10 +16,10 @@ const App = ({ params }) => {
                 <NavLink to="/category/react" activeClassName='selected'>React</NavLink>
             </li>
             <li>
-                <NavLink to="/category/redux">Redux</NavLink>
+                <NavLink to="/category/redux" activeClassName='selected'>Redux</NavLink>
             </li>
             <li>
-                <NavLink to="/category/udacity">Udacity</NavLink>
+                <NavLink to="/category/udacity" activeClassName='selected'>Udacity</NavLink>
             </li>
         </ul>
         <Switch>

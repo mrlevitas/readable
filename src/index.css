@@ -8,6 +8,18 @@ li{
   list-style-type: none;
 }
 
+
+div.post-form-wrapper{
+  background-color: #eee;
+  text-align: center;
+};
+
+label.form-label{
+  background-color: #eee;
+  vertical-align: baseline;
+};
+
+
 ul.subheader {
   font-size: 30px;
   font-weight: 300;
