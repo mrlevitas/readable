@@ -1,15 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
-
 import { getPosts } from '../actions/postsIndex'
-
+import { addPost }    from '../actions/addPost';
 import PostList from '../components/PostList'
-// import PostForm          from '../components/PostForm';
+import PostForm from '../components/PostForm'
+import sortBy from 'lodash/sortBy'
 
 class PostsIndex extends React.Component {
   constructor(props) {
     super(props);
-    // this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
 
@@ -17,15 +17,18 @@ class PostsIndex extends React.Component {
     this.props.getPosts()
   }
 
-  // handleSubmit(newPost){
-  //   this.props.addPost(newPost);
-  // }
-
+  handleSubmit(newPost){
+    this.props.addPost(newPost)
+  }
 
   render(){
     return (
       <div>
-        <PostList posts={this.props.posts} />
+        <PostList posts={sortBy(this.props.posts, 'voteScore').reverse()} />
+        <div className="post-form-wrapper">
+          <h2>Write a Post!</h2>
+          <PostForm onSubmit={this.handleSubmit} />
+        </div>
       </div>
     )
   }
@@ -39,6 +42,7 @@ function mapStateToProps (state) {
 
 function mapDispatchToProps (dispatch) {
   return {
+    addPost: (newPost) => dispatch(addPost(newPost)),
     getPosts: () => dispatch(getPosts()),
   }
 }

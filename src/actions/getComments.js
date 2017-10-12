@@ -23,9 +23,9 @@ let getCommentsRequestFailure = () => {
   };
 };
 
-let getComments = (post) => dispatch => {
-  dispatch(getCommentsRequest(post.id))
-  API.fetchComments(post.id)
+let getComments = (postId) => dispatch => {
+  dispatch(getCommentsRequest(postId))
+  API.fetchComments(postId)
     .then((response) => {
       dispatch(getCommentsRequestSuccess(response))
     })

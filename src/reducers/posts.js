@@ -12,6 +12,10 @@ import {
   POST_VOTE_DOWN
 } from '../actions/votePost';
 
+import {
+  ADD_POST_REQUEST_SUCCESS
+} from '../actions/addPost'
+
 const initialPostState = {
   retrievedPosts: []
 }
@@ -58,12 +62,15 @@ let updatePostVote = (array, id, arrow) => {
 }
 
 function post (state = initialPostState, action) {
-  const { title, body, author, category } = action
 
   switch (action.type) {
     case GET_POSTS_REQUEST:
       return Object.assign({}, state, {
-
+      });
+    case ADD_POST_REQUEST_SUCCESS:
+      let newArray = state.retrievedPosts.concat(action.newPost)
+      return Object.assign({}, state, {
+        retrievedPosts: newArray
       });
     case GET_POSTS_REQUEST_SUCCESS:
       return Object.assign({}, state, {

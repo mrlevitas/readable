@@ -4,6 +4,11 @@ import {
   GET_COMMENTS_REQUEST_FAILURE
 } from '../actions/getComments';
 
+import {
+  COMMENT_VOTE_UP,
+  COMMENT_VOTE_DOWN
+} from '../actions/voteComment';
+
 // import {
 //   ADD_COMMENT_REQUEST,
 //   ADD_COMMENT_REQUEST_SUCCESS,
@@ -24,6 +29,33 @@ import {
 
 let initialState = {
   comments: [],
+}
+
+let updateCommentVote = (array, id, arrow) => {
+  let newArray = array.slice();
+  let position = array.findIndex((element) => {
+    return element.id === id;
+  })
+
+  let newElement = null;
+  switch(arrow) {
+    case "up":
+      newElement = Object.assign({}, array[position], {
+        voteScore: array[position]['voteScore'] + 1,
+      });
+      break
+    case "down":
+      newElement = Object.assign({}, array[position], {
+        voteScore: array[position]['voteScore'] - 1
+      });
+      break
+    default:
+      newElement = array[position]
+  }
+
+  newArray.splice(position,1,newElement)
+
+  return newArray
 }
 
 const comment = (state = initialState, action) => {
@@ -81,6 +113,16 @@ const comment = (state = initialState, action) => {
     //   return Object.assign({}, state, {
     //     isFetching: false
     //   });
+    case COMMENT_VOTE_UP:
+      let incrementedCommentsVote = updateCommentVote(state.comments, action.commentId, "up");
+      return Object.assign({}, state, {
+        comments: incrementedCommentsVote
+      });
+    case COMMENT_VOTE_DOWN:
+      let decrementedCommentsVote = updateCommentVote(state.comments, action.commentId, "down");
+      return Object.assign({}, state, {
+        comments: decrementedCommentsVote
+      });
     default:
       return state;
   }
