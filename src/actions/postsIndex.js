@@ -7,15 +7,6 @@ export const GET_POST_COMMENT_COUNT_REQUEST= "GET_POST_COMMENT_COUNT_REQUEST"
 export const GET_POST_COMMENT_COUNT_REQUEST_SUCCESS = "GET_POST_COMMENT_COUNT_REQUEST_SUCCESS"
 export const GET_POST_COMMENT_COUNT_REQUEST_FAILURE = "GET_POST_COMMENT_COUNT_REQUEST_FAILURE"
 
-// export function addPost({ title, body, author, category }) {
-//   return {
-//     type: ADD_POST,
-//     title,
-//     body,
-//     author,
-//     category,
-//   }
-// }
 let getPostCommentCountRequest = (postId) => {
   return {
     type: GET_POST_COMMENT_COUNT_REQUEST,
@@ -72,7 +63,6 @@ let getPosts = () => dispatch => {
       })
     })
     .catch(() => dispatch(getPostsRequestFailure()))
-  // .catch((error) => console.log(error))
 };
 
 export { getPosts };

@@ -53,6 +53,15 @@ export const pushPost = (newPost) =>
                           category: newPost.category})
   })
     .then((response) => response.json())
+
+export const putPost = (newPost) =>
+    fetch(`http://localhost:3001/posts/${newPost.id}`, {
+      headers: voteHeaders,
+      method: "PUT",
+      body: JSON.stringify( {title: newPost.title, body: newPost.body})
+    })
+    .then((response) => response.json())
+
 // export const get = (bookId) =>
 //   fetch(`${api}/books/${bookId}`, { headers })
 //     .then(res => res.json())

@@ -7,13 +7,7 @@ import PostFieldTextarea from './PostFieldTextarea'
 import PostFieldSelect from './PostFieldSelect'
 
 const Form = styled.form`
-  width: 350px;
-  display: inline-block;
-  padding-right:60px;
-  padding-left:60px;
-  background-color: bisque;
-  opacity: .9;
-  box-sizing: border-box;
+
 `;
 
 let validate = (formFields) => {
@@ -38,7 +32,7 @@ let validate = (formFields) => {
   return errors
 }
 
-let PostForm = props => {
+let EditPostForm = props => {
   const { handleSubmit } = props
 
   return (
@@ -83,9 +77,9 @@ let PostForm = props => {
   )
 }
 
-PostForm = reduxForm({
-  form: 'post',
+EditPostForm = reduxForm({
+  form: 'editPost',
   validate
-})(PostForm)
+})(EditPostForm)
 
-export default PostForm;
+export default EditPostForm;
