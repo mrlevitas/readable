@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
-import { NavLink, Link, Route, Switch, Redirect} from 'react-router-dom'
+import { NavLink, Route, Switch, Redirect} from 'react-router-dom'
 import PostsIndex from '../containers/PostsIndex'
 import PostShow from '../containers/PostShow'
 import CategoryShow from '../containers/CategoryShow'

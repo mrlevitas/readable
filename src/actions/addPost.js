@@ -1,4 +1,5 @@
 import * as API from '../utils/api'
+import uniqueid from 'lodash/uniqueId'
 
 export const ADD_POST_REQUEST = "ADD_POST_REQUEST";
 export const ADD_POST_REQUEST_SUCCESS = "ADD_POST_REQUEST_SUCCESS";
@@ -13,7 +14,7 @@ let addPostRequest = () => {
 let addPostRequestSuccess = data => {
   return {
     type: ADD_POST_REQUEST_SUCCESS,
-    post: data
+    newPost: data
   };
 };
 
@@ -24,9 +25,17 @@ let addPostRequestFailure = () => {
 };
 
 let addPost = (newPost) => dispatch => {
+  let fullPost = Object.assign({}, newPost, {
+    timestamp: Date.now(),
+    id: uniqueid(),
+    voteScore: 1,
+    deleted: false,
+    commentCount: 0,
+  });
+
   dispatch(addPostRequest())
-  API.pushPost(newPost)
-    .then((response) => dispatch(addPostRequestSuccess(response)))
+  API.pushPost(fullPost)
+    .then((response) => dispatch(addPostRequestSuccess(fullPost)))
     .catch(() => dispatch(addPostRequestFailure()))
 };
 

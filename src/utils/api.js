@@ -1,5 +1,3 @@
-import uniqueid from 'lodash/uniqueId'
-
 const postsUrl = `http://localhost:3001/posts`;
 const postsHeaders = {
   Accept: 'application/json',
@@ -47,8 +45,8 @@ export const pushPost = (newPost) =>
   fetch(`http://localhost:3001/posts`, {
     headers: voteHeaders,
     method: "POST",
-    body: JSON.stringify({ id: uniqueid(),
-                          timestamp: Date.now(),
+    body: JSON.stringify({ id: newPost.id,
+                          timestamp: newPost.timestamp,
                           title: newPost.title,
                           body: newPost.body,
                           author: newPost.author,

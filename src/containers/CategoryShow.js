@@ -20,7 +20,7 @@ class CategoryShow extends React.Component {
 
 
   render(){
-    let catPosts = this.props.posts.filter( p => {return p.category == this.props.category})
+    let catPosts = this.props.posts.filter( p => {return p.category === this.props.category})
 
     return (
       <div>
