@@ -2,7 +2,7 @@ import React from 'react';
 import PostVoteButton from './PostVoteButton'
 
 const postStyle = {
-  'padding-left': 50,
+  'paddingLeft': 50,
 }
 
 const Post = props => {

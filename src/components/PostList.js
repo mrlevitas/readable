@@ -69,7 +69,7 @@ class PostList extends React.Component {
           <li key={item.id}>
             <EditPostForm key={item.id} initialValues={item} onSubmit={this.handleSubmit}/>
             <div style={postStyle}>
-              <Link to={`/posts/${item.id}`} onClick={() => this.props.getPost(item.id) }>View <strong>{item.commentCount}</strong> Comments</Link>
+              <Link to={`/posts/${item.id}`}>View <strong>{item.commentCount}</strong> Comments</Link>
             </div>
           </li>
         )}
@@ -78,7 +78,7 @@ class PostList extends React.Component {
           <Post data={item}/>
           <div style={postStyle}>
             <button onClick={() => this.props.selectPost(item)}>Edit</button>
-            <Link to={`/posts/${item.id}`} onClick={() => this.props.getPost(item.id) }>View <strong>{item.commentCount}</strong> Comments</Link>
+            <Link to={`/posts/${item.id}`}>View <strong>{item.commentCount}</strong> Comments</Link>
           </div>
         </li>
       )}

@@ -1,16 +1,24 @@
 import {
-  SET_POST,
+  GET_POST_REQUEST,
+  GET_POST_REQUEST_SUCCESS,
+  GET_POST_REQUEST_FAILURE
 } from '../actions/getPost';
 
 let initialState = {
-  currentPostId: ""
+  post: ""
 }
 
 const currentPost = (state = initialState, action) => {
   switch(action.type) {
-    case SET_POST:
+    case GET_POST_REQUEST:
       return Object.assign({}, state, {
-        currentPostId: action.currentPostId
+      });
+    case GET_POST_REQUEST_SUCCESS:
+      return Object.assign({}, state, {
+        post: action.post
+      });
+    case GET_POST_REQUEST_FAILURE:
+      return Object.assign({}, state, {
       });
     default:
       return state;

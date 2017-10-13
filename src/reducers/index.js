@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
-import post from './posts'
-import comment from './comments'
+import post from './post'
+import comment from './comment'
 import currentPost from './currentPost'
 import selectedPost from './selectedPost';
 import { reducer as formReducer } from 'redux-form'

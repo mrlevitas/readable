@@ -55,13 +55,19 @@ export const pushPost = (newPost) =>
     .then((response) => response.json())
 
 export const putPost = (newPost) =>
-    fetch(`http://localhost:3001/posts/${newPost.id}`, {
-      headers: voteHeaders,
-      method: "PUT",
-      body: JSON.stringify( {title: newPost.title, body: newPost.body})
-    })
+  fetch(`http://localhost:3001/posts/${newPost.id}`, {
+    headers: voteHeaders,
+    method: "PUT",
+    body: JSON.stringify( {title: newPost.title, body: newPost.body})
+  })
     .then((response) => response.json())
 
+export const fetchPost = (postId) =>
+  fetch(`http://localhost:3001/posts/${postId}`, {
+    headers: postsHeaders,
+    method: "GET",
+  })
+    .then((response) => response.json())
 // export const get = (bookId) =>
 //   fetch(`${api}/books/${bookId}`, { headers })
 //     .then(res => res.json())

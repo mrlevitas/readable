@@ -1,5 +1,6 @@
 import React from 'react';
-import { connect }        from 'react-redux';
+import { connect } from 'react-redux';
+import { getPost } from '../actions/getPost'
 import { getComments } from '../actions/getComments';
 import Post from '../components/Post'
 import Comment from '../components/Comment'
@@ -11,15 +12,15 @@ class PostShow extends React.Component {
   }
 
   componentDidMount(){
-    this.props.getComments(this.props.currentPostId);
+    this.props.getPost(this.props.match.params.id)
+    this.props.getComments(this.props.match.params.id);
   }
 
   render(){
-    let post = this.props.postArray.find((post) => post.id === this.props.currentPostId)
 
     return(
       <div>
-        <Post data={post} />
+        <Post data={this.props.currentPost} />
         <ul className='comment-list'>
           {this.props.comments.map((item) => (
             <li key={item.id}>
@@ -34,16 +35,15 @@ class PostShow extends React.Component {
 
 function mapStateToProps (state, ownProps) {
   return {
-    postArray: state.post.retrievedPosts,
-    currentPostId: state.currentPost.currentPostId,
+    currentPost: state.currentPost.post,
     comments: state.comment.comments
   }
 }
 
 function mapDispatchToProps (dispatch) {
   return {
+    getPost: (postId) => dispatch(getPost(postId)),
     getComments: (post) => dispatch(getComments(post)),
-    // createPost: (data) => dispatch(addPost(data))
   }
 }
 

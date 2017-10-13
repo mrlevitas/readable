@@ -7,7 +7,13 @@ import PostFieldTextarea from './PostFieldTextarea'
 import PostFieldSelect from './PostFieldSelect'
 
 const Form = styled.form`
-
+  width: 350px;
+  display: inline-block;
+  padding-right:60px;
+  padding-left:60px;
+  background-color: bisque;
+  opacity: .9;
+  box-sizing: border-box;
 `;
 
 let validate = (formFields) => {

@@ -7,7 +7,6 @@ import CategoryShow from '../containers/CategoryShow'
 import { withRouter } from 'react-router-dom'
 
 const App = ({ params }) => {
-
     return (
       <div>
         <NavLink to="/posts">Home</NavLink>
