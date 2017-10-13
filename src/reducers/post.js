@@ -16,12 +16,17 @@ import {
   ADD_POST_REQUEST_SUCCESS
 } from '../actions/addPost'
 
-
 import {
   EDIT_POST_REQUEST,
   EDIT_POST_REQUEST_SUCCESS,
   EDIT_POST_REQUEST_FAILURE
 } from '../actions/editPost';
+
+import {
+  DELETE_POST_REQUEST,
+  DELETE_POST_REQUEST_SUCCESS,
+  DELETE_POST_REQUEST_FAILURE
+} from '../actions/deletePost'
 
 const initialPostState = {
   retrievedPosts: []
@@ -78,6 +83,19 @@ let editFromArray = (array, item) => {
   return newArray;
 }
 
+let deleteFromArray = (array,itemId) => {
+  let newArray = array.slice();
+  let position = array.findIndex((element) => {
+    return element.id === itemId;
+  })
+
+  let deletedItem = newArray[position]
+  deletedItem['deleted'] = true
+
+  newArray.splice(position,1, deletedItem);
+  return newArray;
+}
+
 function post (state = initialPostState, action) {
 
   switch (action.type) {
@@ -129,6 +147,17 @@ function post (state = initialPostState, action) {
     case EDIT_POST_REQUEST_FAILURE:
        return Object.assign({}, state, {
        });
+    case DELETE_POST_REQUEST:
+      return Object.assign({}, state, {
+      });
+    case DELETE_POST_REQUEST_SUCCESS:
+      let deletedPostarr = deleteFromArray(state.retrievedPosts, action.postId);
+      return Object.assign({}, state, {
+        retrievedPosts: deletedPostarr
+      });
+    case DELETE_POST_REQUEST_FAILURE:
+      return Object.assign({}, state, {
+      });
     default :
       return state
   }

@@ -8,6 +8,7 @@ import sortBy from 'lodash/sortBy';
 import EditPostForm from './EditPostForm';
 import { selectPost, deselectPost } from '../actions/selectPost';
 import { editPost } from '../actions/editPost';
+import { deletePost } from '../actions/deletePost'
 
 import onClickOutside from 'react-onclickoutside';
 
@@ -78,6 +79,7 @@ class PostList extends React.Component {
           <Post data={item}/>
           <div style={postStyle}>
             <button onClick={() => this.props.selectPost(item)}>Edit</button>
+            <button onClick={() => this.props.deletePost(item.id)}>Delete</button>
             <Link to={`/posts/${item.id}`}>View <strong>{item.commentCount}</strong> Comments</Link>
           </div>
         </li>
@@ -109,7 +111,8 @@ let mapDispatchToProps = dispatch => {
     getPost: (postId) => dispatch(getPost(postId)),
     selectPost: (selectedPost) => dispatch(selectPost(selectedPost)),
     deselectPost: () => dispatch(deselectPost()),
-    editPost: (post) => dispatch(editPost(post))
+    editPost: (post) => dispatch(editPost(post)),
+    deletePost: (postId) => dispatch(deletePost(postId))
   }
 }
 

@@ -68,6 +68,13 @@ export const fetchPost = (postId) =>
     method: "GET",
   })
     .then((response) => response.json())
+
+export const deletePost = (postId) =>
+  fetch(`http://localhost:3001/posts/${postId}`, {
+    headers: voteHeaders,
+    method: "DELETE"
+  })
+    .then((response) => response.json())
 // export const get = (bookId) =>
 //   fetch(`${api}/books/${bookId}`, { headers })
 //     .then(res => res.json())

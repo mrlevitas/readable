@@ -24,7 +24,6 @@ let getPostRequest = (postId) => {
 }
 
 let getPost = (postId) => dispatch => {
-  debugger
   dispatch(getPostRequest(postId))
   API.fetchPost(postId)
     .then((response) => {

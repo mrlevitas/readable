@@ -78,7 +78,7 @@ let EditPostForm = props => {
           />
       </div>
     </div>
-      <button type="submit">Add Post</button>
+      <button type="submit">Save Post</button>
     </Form>
   )
 }
