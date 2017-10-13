@@ -22,7 +22,7 @@ class PostsIndex extends React.Component {
   }
 
   render(){
-    let sortedNonDeletedPosts = sortBy(this.props.posts, 'voteScore').reverse().filter( p => { return p.deleted === false})
+    let sortedNonDeletedPosts = this.props.posts.filter( p => { return p.deleted === false})
     return (
       <div>
         <PostList posts={sortedNonDeletedPosts} />

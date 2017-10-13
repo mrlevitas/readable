@@ -42,7 +42,7 @@ class PostList extends React.Component {
   // }
 
   componentWillReceiveProps(nextProps){
-    this.setState({orderedPosts: sortBy(nextProps.posts, 'voteScore')});
+    this.setState({orderedPosts: sortBy(nextProps.posts, 'voteScore').reverse()});
   }
 
   toggleSort = (e) => {
@@ -50,12 +50,12 @@ class PostList extends React.Component {
       switch(prevState.order) {
         case "asc":
           return {
-            orderedPosts: sortBy(prevState.orderedPosts, 'voteScore').reverse(),
+            orderedPosts: sortBy(prevState.orderedPosts, 'voteScore'),
             order: "desc"
           };
         case "desc":
           return {
-            orderedPosts: sortBy(prevState.orderedPosts, 'voteScore'),
+            orderedPosts: sortBy(prevState.orderedPosts, 'voteScore').reverse(),
             order: "asc"
           };
       }
