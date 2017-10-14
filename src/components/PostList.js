@@ -2,7 +2,7 @@ import React from 'react'
 import Post from './Post'
 import { Link} from 'react-router-dom'
 import { connect } from 'react-redux'
-import { getPost } from '../actions/getPost';
+// import { getPost } from '../actions/getPost';
 import sortBy from 'lodash/sortBy';
 
 import EditPostForm from './EditPostForm';
@@ -28,7 +28,7 @@ class PostList extends React.Component {
   }
 
   handleClickOutside = event => {
-    if(this.props.selectedPost !== null){
+    if(this.props.selectedPostId !== null){
       this.props.deselectPost();
     }
   }
@@ -36,10 +36,6 @@ class PostList extends React.Component {
   handleSubmit(newPost){
     this.props.editPost(newPost);
   }
-
-  // componentDidMount() {
-  //   this.setState((state) => ({ orderedPosts: sortBy(this.props.posts, 'voteScore') }))
-  // }
 
   componentWillReceiveProps(nextProps){
     this.setState({orderedPosts: sortBy(nextProps.posts, 'voteScore').reverse()});
@@ -65,7 +61,7 @@ class PostList extends React.Component {
   render(){
     let posts = this.state.orderedPosts
     let postMap = posts.map((item) => {
-      if(item.id === this.props.selectedPost){
+      if(item.id === this.props.selectedPostId){
         return(
           <li key={item.id}>
             <EditPostForm key={item.id} initialValues={item} onSubmit={this.handleSubmit}/>
@@ -102,13 +98,13 @@ class PostList extends React.Component {
 
 let mapStateToProps = state => {
   return {
-    selectedPost: state.selectedPost.id
+    selectedPostId: state.selectedPost.id
   };
 };
 
 let mapDispatchToProps = dispatch => {
   return {
-    getPost: (postId) => dispatch(getPost(postId)),
+    // getPost: (postId) => dispatch(getPost(postId)),
     selectPost: (selectedPost) => dispatch(selectPost(selectedPost)),
     deselectPost: () => dispatch(deselectPost()),
     editPost: (post) => dispatch(editPost(post)),

@@ -1,3 +1,5 @@
+import * as HELPER from '../utils/helpers'
+
 import {
   GET_POSTS_REQUEST,
   GET_POSTS_REQUEST_SUCCESS,
@@ -73,39 +75,16 @@ let updatePostVote = (array, id, arrow) => {
   return newArray
 }
 
-let editFromArray = (array, item) => {
-  let newArray = array.slice();
-  let position = array.findIndex((element) => {
-    return element.id === item.id;
-  })
 
-  newArray.splice(position,1,item);
-  return newArray;
-}
-
-let deleteFromArray = (array,itemId) => {
-  let newArray = array.slice();
-  let position = array.findIndex((element) => {
-    return element.id === itemId;
-  })
-
-  let deletedItem = newArray[position]
-  deletedItem['deleted'] = true
-
-  newArray.splice(position,1, deletedItem);
-  return newArray;
-}
 
 function post (state = initialPostState, action) {
-
   switch (action.type) {
     case GET_POSTS_REQUEST:
       return Object.assign({}, state, {
       });
     case ADD_POST_REQUEST_SUCCESS:
-      let newArray = state.retrievedPosts.concat(action.newPost)
       return Object.assign({}, state, {
-        retrievedPosts: newArray
+        retrievedPosts: state.retrievedPosts.concat(action.newPost)
       });
     case GET_POSTS_REQUEST_SUCCESS:
       return Object.assign({}, state, {
@@ -140,7 +119,7 @@ function post (state = initialPostState, action) {
       return Object.assign({}, state, {
       });
     case EDIT_POST_REQUEST_SUCCESS:
-      let editedPosts = editFromArray(state.retrievedPosts,action.post)
+      let editedPosts = HELPER.editFromArray(state.retrievedPosts,action.post)
       return Object.assign({}, state, {
         retrievedPosts: editedPosts
       });
@@ -151,7 +130,7 @@ function post (state = initialPostState, action) {
       return Object.assign({}, state, {
       });
     case DELETE_POST_REQUEST_SUCCESS:
-      let deletedPostarr = deleteFromArray(state.retrievedPosts, action.postId);
+      let deletedPostarr = HELPER.deleteFromArray(state.retrievedPosts, action.postId);
       return Object.assign({}, state, {
         retrievedPosts: deletedPostarr
       });

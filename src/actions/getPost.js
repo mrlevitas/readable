@@ -17,14 +17,14 @@ let getPostRequestFailure = () => {
   };
 };
 
-let getPostRequest = (postId) => {
+let getPostRequest = () => {
   return {
     type: GET_POST_REQUEST,
   }
 }
 
 let getPost = (postId) => dispatch => {
-  dispatch(getPostRequest(postId))
+  dispatch(getPostRequest())
   API.fetchPost(postId)
     .then((response) => {
       dispatch(getPostRequestSuccess(response))

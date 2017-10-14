@@ -2,9 +2,9 @@ import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 import styled from 'styled-components';
 
-import PostFieldInput from './PostFieldInput';
-import PostFieldTextarea from './PostFieldTextarea'
-import PostFieldSelect from './PostFieldSelect'
+import FieldInput from './FieldInput';
+import FieldTextarea from './FieldTextarea'
+import FieldSelect from './FieldSelect'
 
 const Form = styled.form`
   width: 350px;
@@ -47,7 +47,7 @@ let EditPostForm = props => {
         <label>Title</label>
         <Field
           name="title"
-          component={PostFieldInput}
+          component={FieldInput}
           type="text"
           placeholder="Post Title"
         />
@@ -56,7 +56,7 @@ let EditPostForm = props => {
         <label>Author</label>
         <Field
           name="author"
-          component={PostFieldInput}
+          component={FieldInput}
           type="text"
           placeholder="Your name here"
         />
@@ -65,7 +65,7 @@ let EditPostForm = props => {
         <label>Body</label>
         <Field
           name="body"
-          component={PostFieldTextarea}
+          component={FieldTextarea}
           placeholder="Post body here..."/>
       </div>
       <div>
@@ -73,7 +73,7 @@ let EditPostForm = props => {
         <div>
           <Field
             name="category"
-            component={PostFieldSelect}
+            component={FieldSelect}
             options={["", "react", "redux", "udacity"]}
           />
       </div>

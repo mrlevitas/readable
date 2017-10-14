@@ -2,7 +2,8 @@ import { combineReducers } from 'redux'
 import post from './post'
 import comment from './comment'
 import currentPost from './currentPost'
-import selectedPost from './selectedPost';
+import selectedPost from './selectedPost'
+import selectedComment from './selectedComment'
 import { reducer as formReducer } from 'redux-form'
 import { ADD_POST_REQUEST_SUCCESS } from '../actions/addPost';
 
@@ -21,7 +22,8 @@ export default combineReducers({
   post,
   comment,
   currentPost,
-  selectedPost
+  selectedPost,
+  selectedComment
 })
 
 //  comment: (state, action) => {

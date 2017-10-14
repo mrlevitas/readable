@@ -1,3 +1,5 @@
+import * as HELPER from '../utils/helpers'
+
 import {
   GET_COMMENTS_REQUEST,
   GET_COMMENTS_REQUEST_SUCCESS,
@@ -9,23 +11,23 @@ import {
   COMMENT_VOTE_DOWN
 } from '../actions/voteComment';
 
-// import {
-//   ADD_COMMENT_REQUEST,
-//   ADD_COMMENT_REQUEST_SUCCESS,
-//   ADD_COMMENT_REQUEST_FAILURE
-// } from '../actions/addComment';
-//
-// import {
-//   DELETE_COMMENT_REQUEST,
-//   DELETE_COMMENT_REQUEST_SUCCESS,
-//   DELETE_COMMENT_REQUEST_FAILURE
-// } from '../actions/deleteComment';
-//
-// import {
-//   EDIT_COMMENT_REQUEST,
-//   EDIT_COMMENT_REQUEST_SUCCESS,
-//   EDIT_COMMENT_REQUEST_FAILURE
-// } from '../actions/editComment';
+import {
+  ADD_COMMENT_REQUEST,
+  ADD_COMMENT_REQUEST_SUCCESS,
+  ADD_COMMENT_REQUEST_FAILURE
+} from '../actions/addComment';
+
+import {
+  DELETE_COMMENT_REQUEST,
+  DELETE_COMMENT_REQUEST_SUCCESS,
+  DELETE_COMMENT_REQUEST_FAILURE
+} from '../actions/deleteComment';
+
+import {
+  EDIT_COMMENT_REQUEST,
+  EDIT_COMMENT_REQUEST_SUCCESS,
+  EDIT_COMMENT_REQUEST_FAILURE
+} from '../actions/editComment';
 
 let initialState = {
   comments: [],
@@ -67,52 +69,40 @@ const comment = (state = initialState, action) => {
     case GET_COMMENTS_REQUEST_SUCCESS:
       return Object.assign({}, state, {
         comments: action.comments,
-        // isFetching: false
       });
     case GET_COMMENTS_REQUEST_FAILURE:
       return Object.assign({}, state, {
       });
-    // case ADD_COMMENT_REQUEST:
-    //   return Object.assign({}, state, {
-    //     isFetching: true
-    //   });
-    // case ADD_COMMENT_REQUEST_SUCCESS:
-    //   return Object.assign({}, state, {
-    //     retrievedComments: state.retrievedComments.concat(action.comments),
-    //     isFetching: false
-    //   });
-    // case ADD_COMMENT_REQUEST_FAILURE:
-    //   return Object.assign({}, state, {
-    //     isFetching: false
-    //   });
-    // case DELETE_COMMENT_REQUEST:
-    //   return Object.assign({}, state, {
-    //     isFetching: true
-    //   });
-    // case DELETE_COMMENT_REQUEST_SUCCESS:
-    //   let newComments = deleteFromArray(state.retrievedComments,action.commentId)
-    //   return Object.assign({}, state, {
-    //     retrievedComments: newComments,
-    //     isFetching: false
-    //   });
-    // case DELETE_COMMENT_REQUEST_FAILURE:
-    //   return Object.assign({}, state, {
-    //     isFetching: false
-    //   });
-    // case EDIT_COMMENT_REQUEST:
-    //   return Object.assign({}, state, {
-    //     isFetching: true
-    //   });
-    // case EDIT_COMMENT_REQUEST_SUCCESS:
-    //   let editedComments = editFromArray(state.retrievedComments,action.comments)
-    //   return Object.assign({}, state, {
-    //     retrievedComments: editedComments,
-    //     isFetching: false
-    //   });
-    // case EDIT_COMMENT_REQUEST_FAILURE:
-    //   return Object.assign({}, state, {
-    //     isFetching: false
-    //   });
+    case ADD_COMMENT_REQUEST:
+      return Object.assign({}, state, {
+      });
+    case ADD_COMMENT_REQUEST_SUCCESS:
+      return Object.assign({}, state, {
+        comments: state.comments.concat(action.newComment),
+      });
+    case ADD_COMMENT_REQUEST_FAILURE:
+      return Object.assign({}, state, {
+      });
+    case DELETE_COMMENT_REQUEST:
+      return Object.assign({}, state, {
+      });
+    case DELETE_COMMENT_REQUEST_SUCCESS:
+      let newComments = HELPER.deleteFromArray(state.comments,action.commentId)
+      return Object.assign({}, state, {
+        comments: newComments
+      });
+    case DELETE_COMMENT_REQUEST_FAILURE:
+      return Object.assign({}, state, {
+      });
+    case EDIT_COMMENT_REQUEST:
+      return state
+    case EDIT_COMMENT_REQUEST_SUCCESS:
+      let editedComments = HELPER.editFromArray(state.comments, action.comment)
+      return Object.assign({}, state, {
+        comments: editedComments,
+      });
+    case EDIT_COMMENT_REQUEST_FAILURE:
+      return state
     case COMMENT_VOTE_UP:
       let incrementedCommentsVote = updateCommentVote(state.comments, action.commentId, "up");
       return Object.assign({}, state, {

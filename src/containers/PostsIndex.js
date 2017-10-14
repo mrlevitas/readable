@@ -22,11 +22,11 @@ class PostsIndex extends React.Component {
   }
 
   render(){
-    let sortedNonDeletedPosts = this.props.posts.filter( p => { return p.deleted === false})
+    let nonDeletedPosts = this.props.posts.filter( p => { return p.deleted === false})
     return (
       <div>
-        <PostList posts={sortedNonDeletedPosts} />
-        <div className="post-form-wrapper">
+        <PostList posts={nonDeletedPosts} />
+        <div className="form-wrapper">
           <h2>Write a Post!</h2>
           <PostForm onSubmit={this.handleSubmit} />
         </div>

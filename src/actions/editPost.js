@@ -25,10 +25,14 @@ let editPostRequestFailure = () => {
 };
 
 let editPost = (newPost) => dispatch => {
+  let editedPost = Object.assign({}, newPost, {
+    timestamp: Date.now(),
+  });
+
   dispatch(editPostRequest())
-  API.putPost(newPost)
+  API.putPost(editedPost)
     .then((response) => {
-      dispatch(editPostRequestSuccess(newPost))
+      dispatch(editPostRequestSuccess(editedPost))
       Promise.resolve()
       .then(() => dispatch(deselectPost()))
     })
