@@ -11,6 +11,7 @@ const Form = styled.form`
   display: inline-block;
   padding-right:60px;
   padding-left:60px;
+  margin-bottom:60px;
   background-color: bisque;
   opacity: .9;
   box-sizing: border-box;
