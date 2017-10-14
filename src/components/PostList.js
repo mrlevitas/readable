@@ -2,7 +2,6 @@ import React from 'react'
 import Post from './Post'
 import { Link} from 'react-router-dom'
 import { connect } from 'react-redux'
-// import { getPost } from '../actions/getPost';
 import sortBy from 'lodash/sortBy';
 
 import EditPostForm from './EditPostForm';
@@ -87,7 +86,7 @@ class PostList extends React.Component {
         <button
           className='sort-btn'
           onClick={this.toggleSort}>
-          Switch Sorting
+          Switch Post Sorting
         </button>
         <ul className='post-list'>
           {postMap}
@@ -104,7 +103,6 @@ let mapStateToProps = state => {
 
 let mapDispatchToProps = dispatch => {
   return {
-    // getPost: (postId) => dispatch(getPost(postId)),
     selectPost: (selectedPost) => dispatch(selectPost(selectedPost)),
     deselectPost: () => dispatch(deselectPost()),
     editPost: (post) => dispatch(editPost(post)),

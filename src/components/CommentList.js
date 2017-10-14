@@ -60,7 +60,7 @@ class CommentList extends React.Component {
   render(){
     let comments = this.state.orderedComments;
     let commentMap = comments.map((item) => {
-        if(item.id === this.props.selectedComment){
+        if(item.id === this.props.selectedCommentId){
           return(
             <li key={item.id}>
               <EditCommentForm key={item.id} initialValues={item} onSubmit={this.handleSubmit}/>
@@ -81,7 +81,7 @@ class CommentList extends React.Component {
         <button
           className='sort-btn'
           onClick={this.toggleSort}>
-          Switch Sorting
+          Switch Comment Sorting
         </button>
         <ul className='comment-list'>
           {commentMap}
