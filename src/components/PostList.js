@@ -2,8 +2,19 @@ import React from 'react'
 import Post from './Post'
 import { Link} from 'react-router-dom'
 import { connect } from 'react-redux'
-import { getPost } from '../actions/getPost';
+// import { getPost } from '../actions/getPost';
 import sortBy from 'lodash/sortBy';
+
+import EditPostForm from './EditPostForm';
+import { selectPost, deselectPost } from '../actions/selectPost';
+import { editPost } from '../actions/editPost';
+import { deletePost } from '../actions/deletePost'
+
+import onClickOutside from 'react-onclickoutside';
+
+const postStyle = {
+  'padding-left': 50,
+}
 
 class PostList extends React.Component {
   constructor(props) {
@@ -12,15 +23,22 @@ class PostList extends React.Component {
       orderedPosts: [],
       order: "asc"
     };
+    this.handleSubmit = this.handleSubmit.bind(this);
     this.toggleSort = this.toggleSort.bind(this);
   }
 
-  // componentDidMount() {
-  //   this.setState((state) => ({ orderedPosts: sortBy(this.props.posts, 'voteScore') }))
-  // }
+  handleClickOutside = event => {
+    if(this.props.selectedPostId !== null){
+      this.props.deselectPost();
+    }
+  }
+
+  handleSubmit(newPost){
+    this.props.editPost(newPost);
+  }
 
   componentWillReceiveProps(nextProps){
-    this.setState({orderedPosts: nextProps.posts});
+    this.setState({orderedPosts: sortBy(nextProps.posts, 'voteScore').reverse()});
   }
 
   toggleSort = (e) => {
@@ -28,12 +46,12 @@ class PostList extends React.Component {
       switch(prevState.order) {
         case "asc":
           return {
-            orderedPosts: sortBy(prevState.orderedPosts, 'voteScore').reverse(),
+            orderedPosts: sortBy(prevState.orderedPosts, 'voteScore'),
             order: "desc"
           };
         case "desc":
           return {
-            orderedPosts: sortBy(prevState.orderedPosts, 'voteScore'),
+            orderedPosts: sortBy(prevState.orderedPosts, 'voteScore').reverse(),
             order: "asc"
           };
       }
@@ -41,6 +59,29 @@ class PostList extends React.Component {
   }
 
   render(){
+    let posts = this.state.orderedPosts
+    let postMap = posts.map((item) => {
+      if(item.id === this.props.selectedPostId){
+        return(
+          <li key={item.id}>
+            <EditPostForm key={item.id} initialValues={item} onSubmit={this.handleSubmit}/>
+            <div style={postStyle}>
+              <Link to={`/posts/${item.id}`}>View <strong>{item.commentCount}</strong> Comments</Link>
+            </div>
+          </li>
+        )}
+      return(
+        <li key={item.id}>
+          <Post data={item}/>
+          <div style={postStyle}>
+            <button onClick={() => this.props.selectPost(item)}>Edit</button>
+            <button onClick={() => this.props.deletePost(item.id)}>Delete</button>
+            <Link to={`/posts/${item.id}`}>View <strong>{item.commentCount}</strong> Comments</Link>
+          </div>
+        </li>
+      )}
+    )
+
     return (
       <div>
         <button
@@ -49,26 +90,26 @@ class PostList extends React.Component {
           Switch Sorting
         </button>
         <ul className='post-list'>
-          {this.state.orderedPosts.map((item) => (
-            <li key={item.id}>
-              <Post data={item} />
-              <Link to={`/posts/${item.id}`} onClick={() => this.props.getPost(item.id) }>View <strong>{item.commentCount}</strong> Comments</Link>
-            </li>
-          ))}
+          {postMap}
         </ul>
       </div>
     )}
 }
 
-let mapStateToProps = () => {
-  return {};
+let mapStateToProps = state => {
+  return {
+    selectedPostId: state.selectedPost.id
+  };
 };
 
 let mapDispatchToProps = dispatch => {
   return {
-    getPost: (postId) => dispatch(getPost(postId)),
-    // createPost: (data) => dispatch(addPost(data))
+    // getPost: (postId) => dispatch(getPost(postId)),
+    selectPost: (selectedPost) => dispatch(selectPost(selectedPost)),
+    deselectPost: () => dispatch(deselectPost()),
+    editPost: (post) => dispatch(editPost(post)),
+    deletePost: (postId) => dispatch(deletePost(postId))
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PostList);
+export default connect(mapStateToProps, mapDispatchToProps)(onClickOutside(PostList));

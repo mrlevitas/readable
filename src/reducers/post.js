@@ -1,3 +1,5 @@
+import * as HELPER from '../utils/helpers'
+
 import {
   GET_POSTS_REQUEST,
   GET_POSTS_REQUEST_SUCCESS,
@@ -15,6 +17,18 @@ import {
 import {
   ADD_POST_REQUEST_SUCCESS
 } from '../actions/addPost'
+
+import {
+  EDIT_POST_REQUEST,
+  EDIT_POST_REQUEST_SUCCESS,
+  EDIT_POST_REQUEST_FAILURE
+} from '../actions/editPost';
+
+import {
+  DELETE_POST_REQUEST,
+  DELETE_POST_REQUEST_SUCCESS,
+  DELETE_POST_REQUEST_FAILURE
+} from '../actions/deletePost'
 
 const initialPostState = {
   retrievedPosts: []
@@ -61,16 +75,16 @@ let updatePostVote = (array, id, arrow) => {
   return newArray
 }
 
-function post (state = initialPostState, action) {
 
+
+function post (state = initialPostState, action) {
   switch (action.type) {
     case GET_POSTS_REQUEST:
       return Object.assign({}, state, {
       });
     case ADD_POST_REQUEST_SUCCESS:
-      let newArray = state.retrievedPosts.concat(action.newPost)
       return Object.assign({}, state, {
-        retrievedPosts: newArray
+        retrievedPosts: state.retrievedPosts.concat(action.newPost)
       });
     case GET_POSTS_REQUEST_SUCCESS:
       return Object.assign({}, state, {
@@ -100,6 +114,28 @@ function post (state = initialPostState, action) {
       let decrementedPostsVote = updatePostVote(state.retrievedPosts, action.postId, "down");
       return Object.assign({}, state, {
         retrievedPosts: decrementedPostsVote
+      });
+    case EDIT_POST_REQUEST:
+      return Object.assign({}, state, {
+      });
+    case EDIT_POST_REQUEST_SUCCESS:
+      let editedPosts = HELPER.editFromArray(state.retrievedPosts,action.post)
+      return Object.assign({}, state, {
+        retrievedPosts: editedPosts
+      });
+    case EDIT_POST_REQUEST_FAILURE:
+       return Object.assign({}, state, {
+       });
+    case DELETE_POST_REQUEST:
+      return Object.assign({}, state, {
+      });
+    case DELETE_POST_REQUEST_SUCCESS:
+      let deletedPostarr = HELPER.deleteFromArray(state.retrievedPosts, action.postId);
+      return Object.assign({}, state, {
+        retrievedPosts: deletedPostarr
+      });
+    case DELETE_POST_REQUEST_FAILURE:
+      return Object.assign({}, state, {
       });
     default :
       return state

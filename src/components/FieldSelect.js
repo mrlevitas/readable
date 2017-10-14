@@ -10,7 +10,7 @@ const PostFieldSelect = ({ input, label, placeholder, meta: { touched, error }, 
       <div>
         <select {...input} id={id}>
           {options.map((oStr) => (
-            <option value={oStr}>{oStr}</option>
+            <option key={oStr} value={oStr}>{oStr}</option>
           ))}
         </select>
       </div>

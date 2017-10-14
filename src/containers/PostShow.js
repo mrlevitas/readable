@@ -1,49 +1,58 @@
 import React from 'react';
-import { connect }        from 'react-redux';
+import { connect } from 'react-redux';
+import { getPost } from '../actions/getPost'
 import { getComments } from '../actions/getComments';
+import { addComment } from '../actions/addComment'
 import Post from '../components/Post'
 import Comment from '../components/Comment'
+import CommentForm from '../components/CommentForm'
+import CommentList from '../components/CommentList'
 
 class PostShow extends React.Component {
   constructor(props) {
     super(props);
-    // this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount(){
-    this.props.getComments(this.props.currentPostId);
+    this.props.getPost(this.props.match.params.id)
+    this.props.getComments(this.props.match.params.id);
+  }
+
+  handleSubmit(newComment){
+    this.props.addComment(newComment, this.props.currentPost.id)
   }
 
   render(){
-    let post = this.props.postArray.find((post) => post.id === this.props.currentPostId)
-
+    let nonDeletedComments = this.props.comments.filter( p => { return p.deleted === false})
     return(
       <div>
-        <Post data={post} />
-        <ul className='comment-list'>
-          {this.props.comments.map((item) => (
-            <li key={item.id}>
-              <Comment data={item}/>
-            </li>
-          ))}
-        </ul>
+        <Post data={this.props.currentPost} />
+        <div>
+          <CommentList comments={nonDeletedComments}/>
+          <div className="form-wrapper">
+            <h2>Add a Comment!</h2>
+            <CommentForm onSubmit={this.handleSubmit}/>
+          </div>
+        </div>
       </div>
     )
   }
 }
 
-function mapStateToProps (state, ownProps) {
+function mapStateToProps (state) {
   return {
-    postArray: state.post.retrievedPosts,
-    currentPostId: state.currentPost.currentPostId,
+    currentPost: state.currentPost.post,
+    selectedCommentId: state.selectedComment.id,
     comments: state.comment.comments
   }
 }
 
 function mapDispatchToProps (dispatch) {
   return {
+    getPost: (postId) => dispatch(getPost(postId)),
     getComments: (post) => dispatch(getComments(post)),
-    // createPost: (data) => dispatch(addPost(data))
+    addComment: (newComment, postId) => dispatch(addComment(newComment, postId)),
   }
 }
 

@@ -11,17 +11,13 @@ const Form = styled.form`
   display: inline-block;
   padding-right:60px;
   padding-left:60px;
-  background-color: bisque;
+  background-color: teal;
   opacity: .9;
   box-sizing: border-box;
 `;
 
 let validate = (formFields) => {
   const errors = {};
-
-  if(!formFields.title) {
-    errors['title'] = "Please enter a post title!";
-  }
 
   if(!formFields.body) {
     errors['body'] = "Please enter a post body!";
@@ -31,26 +27,20 @@ let validate = (formFields) => {
     errors['author'] = "Please enter your name!";
   }
 
-  if(!formFields.category) {
-    errors['category'] = "Please pick a category!";
-  }
-
   return errors
 }
 
-let PostForm = props => {
+let CommentForm = props => {
   const { handleSubmit } = props
 
   return (
-    <Form onSubmit={ handleSubmit }>
+    <Form onSubmit={handleSubmit}>
       <div>
-        <label>Title</label>
+        <label>Comment</label>
         <Field
-          name="title"
-          component={FieldInput}
-          type="text"
-          placeholder="Post Title"
-        />
+          name="body"
+          component={FieldTextarea}
+          placeholder="Comment body here..."/>
       </div>
       <div>
         <label>Author</label>
@@ -61,31 +51,14 @@ let PostForm = props => {
           placeholder="Your name here"
         />
       </div>
-      <div>
-        <label>Body</label>
-        <Field
-          name="body"
-          component={FieldTextarea}
-          placeholder="Post body here..."/>
-      </div>
-      <div>
-        <label>Category</label>
-        <div>
-          <Field
-            name="category"
-            component={FieldSelect}
-            options={["", "react", "redux", "udacity"]}
-          />
-      </div>
-    </div>
-      <button type="submit">Add Post</button>
+      <button type="submit">Add Comment</button>
     </Form>
   )
 }
 
-PostForm = reduxForm({
-  form: 'post',
+CommentForm = reduxForm({
+  form: 'comment',
   validate
-})(PostForm)
+})(CommentForm)
 
-export default PostForm;
+export default CommentForm;

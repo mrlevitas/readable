@@ -25,7 +25,7 @@ class CategoryShow extends React.Component {
     return (
       <div>
         <h3>Category: {this.props.category}</h3>
-        <PostList posts={sortBy(catPosts, 'voteScore').reverse()} />
+        <PostList posts={catPosts} />
       </div>
     )
   }

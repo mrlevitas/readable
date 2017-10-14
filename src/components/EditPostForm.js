@@ -38,7 +38,7 @@ let validate = (formFields) => {
   return errors
 }
 
-let PostForm = props => {
+let EditPostForm = props => {
   const { handleSubmit } = props
 
   return (
@@ -78,14 +78,14 @@ let PostForm = props => {
           />
       </div>
     </div>
-      <button type="submit">Add Post</button>
+      <button type="submit">Save Post</button>
     </Form>
   )
 }
 
-PostForm = reduxForm({
-  form: 'post',
+EditPostForm = reduxForm({
+  form: 'editPost',
   validate
-})(PostForm)
+})(EditPostForm)
 
-export default PostForm;
+export default EditPostForm;

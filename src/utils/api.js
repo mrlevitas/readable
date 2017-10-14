@@ -53,6 +53,54 @@ export const pushPost = (newPost) =>
                           category: newPost.category})
   })
     .then((response) => response.json())
+
+export const putPost = (newPost) =>
+  fetch(`http://localhost:3001/posts/${newPost.id}`, {
+    headers: voteHeaders,
+    method: "PUT",
+    body: JSON.stringify( {title: newPost.title, body: newPost.body})
+  })
+    .then((response) => response.json())
+
+export const fetchPost = (postId) =>
+  fetch(`http://localhost:3001/posts/${postId}`, {
+    headers: postsHeaders,
+    method: "GET",
+  })
+    .then((response) => response.json())
+
+export const deletePost = (postId) =>
+  fetch(`http://localhost:3001/posts/${postId}`, {
+    headers: voteHeaders,
+    method: "DELETE"
+  })
+    .then((response) => response.json())
+
+export const pushComment = (newComment) =>
+  fetch(`http://localhost:3001/comments`, {
+    headers: voteHeaders,
+    method: "POST",
+    body: JSON.stringify({ id: newComment.id,
+                          timestamp: newComment.timestamp,
+                          body: newComment.body,
+                          author: newComment.author,
+                          parentId: newComment.parentId})
+  }).then((response) => response.json())
+
+export const putComment = (newComment) =>
+  fetch(`http://localhost:3001/comments/${newComment.id}`, {
+    headers: voteHeaders,
+    method: "PUT",
+    body: JSON.stringify( {timestamp: newComment.timestamp, body: newComment.body})
+  })
+    .then((response) => response.json())
+
+export const deleteComment = (commentId) =>
+  fetch(`http://localhost:3001/comments/${commentId}`, {
+    headers: voteHeaders,
+    method: "DELETE"
+  })
+    .then((response) => response.json())
 // export const get = (bookId) =>
 //   fetch(`${api}/books/${bookId}`, { headers })
 //     .then(res => res.json())
