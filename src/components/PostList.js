@@ -2,14 +2,14 @@ import React from 'react'
 import Post from './Post'
 import { Link} from 'react-router-dom'
 import { connect } from 'react-redux'
-import sortBy from 'lodash/sortBy';
+import sortBy from 'lodash/sortBy'
 
-import EditPostForm from './EditPostForm';
-import { selectPost, deselectPost } from '../actions/selectPost';
-import { editPost } from '../actions/editPost';
+import EditPostForm from './EditPostForm'
+import { selectPost, deselectPost } from '../actions/selectPost'
+import { editPost } from '../actions/editPost'
 import { deletePost } from '../actions/deletePost'
 
-import onClickOutside from 'react-onclickoutside';
+import onClickOutside from 'react-onclickoutside'
 
 const postStyle = {
   'padding-left': 50,
